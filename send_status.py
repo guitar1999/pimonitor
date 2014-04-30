@@ -15,10 +15,10 @@ args = p.parse_args()
 db = psycopg2.connect(host=dbhost, database=dbname, user=dbuser)
 cursor = db.cursor()
 
-query = """UPDATE pi_checkin SET timestamp = CURRENT_TIMESTAMP WHERE pi = {0};""".format(args.piname)
+query = """UPDATE pi_checkin SET timestamp = CURRENT_TIMESTAMP WHERE pi = '{0}';""".format(args.piname)
 try:
     cursor.execute(query)
-    cursor.commit()
+    db.commit()
 except Exception, msg:
     print msg
 cursor.close()
